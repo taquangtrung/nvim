@@ -12,11 +12,27 @@ return {
         lazy = false,
     },
 
+
+    -- Flit: enhanced f/t motion
+    {
+        "ggandor/flit.nvim",
+        lazy = false,
+        keys = function()
+            ---@type LazyKeys[]
+            local ret = {}
+            for _, key in ipairs({ "f", "F", "t", "T" }) do
+                ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+            end
+            return ret
+        end,
+        opts = { labeled_modes = "nx" },
+    },
+
     -- Hop: easy-motion-like motion
     -- https://github.com/phaazon/hop.nvim/wiki/Commands
     {
         "phaazon/hop.nvim",
-        lazy = true,
+        lazy = false,
         event = "BufRead",
         config = function()
             require("hop").setup({
@@ -79,6 +95,7 @@ return {
     -- Flash
     {
         "folke/flash.nvim",
+        lazy = false,
         keys = {
             { "S", mode = { "n", "x", "o" }, false },
         },
@@ -87,6 +104,7 @@ return {
     -- Leap: override the default settings of LazyVim
     {
         "ggandor/leap.nvim",
+        lazy = false,
         config = function(_, opts)
             local leap = require("leap")
             for k, v in pairs(opts) do
@@ -100,7 +118,7 @@ return {
     -- Spider: Support CamelCase motion
     {
         "chrisgrieser/nvim-spider",
-        lazy = true,
+        lazy = false,
         keys = {
             {
                 "\\\\w",
